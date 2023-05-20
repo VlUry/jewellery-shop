@@ -6,7 +6,7 @@ const sen = Sen({ weight: "400", subsets: ["latin"] });
 
 export const metadata = {
   title: "Aell",
-  description: "Jewelry by Anastasiia",
+  description: "Jewellery by Anastasiia",
 };
 
 export default function RootLayout({

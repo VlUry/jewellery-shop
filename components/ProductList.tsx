@@ -26,11 +26,11 @@ interface ProductProps {
 }
 
 const Product: React.FC<ProductProps> = ({ product }) => {
-  const { images, description, name } = product;
+  const { images, description, name, id } = product;
 
   return (
     <MotionLink
-      href={`${123}`}
+      href={id}
       whileHover="hovered"
       whileFocus="hovered"
       initial="initial"
