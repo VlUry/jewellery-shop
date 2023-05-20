@@ -32,7 +32,7 @@ const Bag: React.FC = () => {
         },
         body: JSON.stringify({ line_items }),
       });
-      const { session } = await res.json();
+      const session = await res.json();
 
       setCheckoutPending(false);
 
@@ -64,17 +64,17 @@ const Bag: React.FC = () => {
                 </div>
                 <Image
                   fill
-                  sizes="45vw"
+                  sizes="100px"
                   quality={1}
                   className="object-cover blur"
-                  src={i.productImg}
-                  alt={i.description ? i.description : i.name}
+                  src={i.img}
+                  alt={i.name}
                 />
               </div>
             ))}
           </div>
           <div className="mt-3 flex h-[20%] flex-col items-center justify-center pb-3">
-            <p className="w-2/3 text-sm">Total: EUR {totalCost()}</p>
+            <p className="w-2/3">Total: EUR {totalCost()}</p>
             <CheckoutButton
               onCheckout={handleCheckout}
               checkoutPending={checkoutPending}

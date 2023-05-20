@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { ProductI } from "../page";
+import ProductButton from "@/components/ProductButton";
 
 export interface ParamsI {
   productId: string;
@@ -15,8 +16,10 @@ export default async function ProductPage({ params }: { params: ParamsI }) {
     images,
     name,
     description,
-    default_price: { currency, unit_amount },
+    default_price: { id: priceId, currency, unit_amount },
   } = product;
+
+  const price = unit_amount ? unit_amount / 100 : 444;
 
   return (
     <div className="flex w-full gap-6">
@@ -39,11 +42,14 @@ export default async function ProductPage({ params }: { params: ParamsI }) {
         </p>
         <div className="mt-3">
           <p className="uppercase">
-            {currency} {unit_amount && unit_amount / 100}
+            {currency} {price}
           </p>
-          <button className="h-16 w-48 rounded bg-black text-xl text-white">
-            Add
-          </button>
+          <ProductButton
+            priceId={priceId}
+            img={images[0]}
+            name={name}
+            price={price}
+          />
         </div>
       </div>
     </div>

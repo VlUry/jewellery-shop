@@ -1,10 +1,9 @@
 import { create } from "zustand";
 
-interface BagItemI {
+export interface BagItemI {
   priceId: string;
   name: string;
-  description: string;
-  productImg: string;
+  img: string;
   price: number;
 }
 
@@ -27,11 +26,11 @@ export const useBagStore = create<BagI>((set, get) => ({
   },
   addItemToCart: (item) =>
     set((state) => ({ items: state.items ? [...state.items, item] : [item] })),
-  removeItemFromCart: (priceId) =>
+  removeItemFromCart: (id) =>
     set((state) => {
       if (!Array.isArray(state.items)) return state;
 
-      const filteredArray = state.items.filter((i) => i.priceId !== priceId);
+      const filteredArray = state.items.filter((i) => i.priceId !== id);
       if (filteredArray.length) return { items: filteredArray };
 
       return { items: null };
