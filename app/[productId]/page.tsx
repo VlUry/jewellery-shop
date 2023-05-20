@@ -22,8 +22,8 @@ export default async function ProductPage({ params }: { params: ParamsI }) {
   const price = unit_amount ? unit_amount / 100 : 444;
 
   return (
-    <div className="flex w-full gap-6">
-      <div className="relative h-[80vh] w-[30vw] overflow-hidden rounded md:h-[80vh] md:w-[30vw]">
+    <div className="flex w-full flex-col items-center gap-6 md:w-auto md:flex-row">
+      <div className="relative h-[50vh] w-full overflow-hidden rounded md:h-[85vh] md:w-[35vw]">
         <Image
           fill
           className="object-cover"
@@ -33,14 +33,14 @@ export default async function ProductPage({ params }: { params: ParamsI }) {
           priority
         />
       </div>
-      <div className="w-[30vw] md:w-[30vw]">
-        <h1 className="text-2xl font-bold">{name}</h1>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Error
-          laboriosam aliquam quas harum qui corrupti consectetur accusamus
-          excepturi odit recusandae!
-        </p>
-        <div className="mt-3">
+      <div className="flex w-full flex-col items-center md:w-[20vw] md:items-start">
+        <div>
+          <h1 className="text-center text-2xl font-bold md:text-start">
+            {name}
+          </h1>
+          <p className="mt-3">{description}</p>
+        </div>
+        <div className="mt-6">
           <p className="uppercase">
             {currency} {price}
           </p>

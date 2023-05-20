@@ -11,7 +11,7 @@ interface ProductListProps {
 
 const ProductList: React.FC<ProductListProps> = ({ products }) => {
   return (
-    <div className="grid grid-cols-2 gap-2 md:grid-cols-3">
+    <div className="grid w-full grid-cols-2 gap-2 md:w-auto md:grid-cols-3">
       {products.map((product) => (
         <Product product={product} key={product.id} />
       ))}
@@ -34,7 +34,7 @@ const Product: React.FC<ProductProps> = ({ product }) => {
       whileHover="hovered"
       whileFocus="hovered"
       initial="initial"
-      className="h-[45vh] w-[45vw] md:h-[50vh] md:w-[25vw]"
+      className="h-[45vh] md:h-[50vh] md:w-[25vw]"
     >
       <div className="relative h-full w-full overflow-hidden rounded">
         <MotionImage
