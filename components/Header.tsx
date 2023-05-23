@@ -1,8 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { useBagStore } from "../store/bag";
 import Bag from "./Bag";
-import { AnimatePresence } from "framer-motion";
+import { AnimatePresence, useMotionValueEvent, useScroll } from "framer-motion";
 import Link from "next/link";
 
 const Header: React.FC = () => {
@@ -10,9 +11,26 @@ const Header: React.FC = () => {
   const isOpened = useBagStore((state) => state.isOpened);
   const openBag = useBagStore((state) => state.setIsOpen);
 
+  const [isAtTop, setIsAtTop] = useState(true);
+
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    if (isAtTop && latest > 12) {
+      setIsAtTop(false);
+    }
+    if (!isAtTop && latest <= 12) {
+      setIsAtTop(true);
+    }
+  });
+
   return (
-    <header className="flex w-full justify-center">
-      <nav className="flex h-12 w-2/3 items-center justify-between border-b border-black px-3">
+    <header className="sticky top-0 z-10 flex w-full justify-center bg-stone-50">
+      <nav
+        className={`flex h-12 items-center justify-between border-b border-black transition-all delay-75 duration-200 ${
+          isAtTop ? "w-2/3 px-3" : "w-full px-6"
+        }`}
+      >
         <a
           href="https://instagram.com/aellsun"
           target="_blank"

@@ -48,7 +48,7 @@ const Bag: React.FC = () => {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 10, opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed right-0 top-0 z-20 flex h-screen w-screen flex-col border border-black bg-white md:right-3 md:top-3 md:h-[calc(100%-1.5rem)] md:w-96 md:rounded-md"
+      className="fixed right-0 top-0 z-20 flex h-screen w-screen flex-col border border-black bg-stone-50 md:right-3 md:top-3 md:h-[calc(100%-1.5rem)] md:w-96 md:rounded-md"
     >
       {itemsInBag ? (
         <>

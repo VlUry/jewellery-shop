@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${sen.className} m-3`}>
+      <body className={`${sen.className} mx-3 mb-3 bg-stone-50 md:mx-6`}>
         <Header />
         <main className="mt-6 flex justify-center">{children}</main>
       </body>
