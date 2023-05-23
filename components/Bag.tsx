@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useBagStore } from "../store/bag";
+import { BagItemI, useBagStore } from "../store/bag";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -48,32 +48,16 @@ const Bag: React.FC = () => {
       animate={{ x: 0, opacity: 1 }}
       exit={{ x: 10, opacity: 0 }}
       transition={{ duration: 0.2 }}
-      className="fixed right-0 top-0 z-20 flex h-screen w-screen flex-col border border-black bg-white px-3 pt-3 md:right-3 md:top-3 md:h-[calc(100%-1.5rem)] md:w-96 md:rounded-md"
+      className="fixed right-0 top-0 z-20 flex h-screen w-screen flex-col border border-black bg-white md:right-3 md:top-3 md:h-[calc(100%-1.5rem)] md:w-96 md:rounded-md"
     >
       {itemsInBag ? (
         <>
-          <div className="flex h-5/6 flex-col gap-3">
+          <div className="flex h-5/6 flex-col overflow-auto">
             {itemsInBag.map((i) => (
-              <div
-                key={i.priceId}
-                className="relative flex h-[calc(50%-0.375rem)] cursor-pointer items-center justify-center overflow-hidden rounded"
-              >
-                <div className="absolute z-10 flex h-full w-full flex-col items-center justify-center bg-black/50 text-xl text-white">
-                  <p>{i.name}</p>
-                  <p>EUR {i.price}</p>
-                </div>
-                <Image
-                  fill
-                  sizes="100px"
-                  quality={1}
-                  className="object-cover blur"
-                  src={i.img}
-                  alt={i.name}
-                />
-              </div>
+              <BagProduct product={i} key={i.priceId} />
             ))}
           </div>
-          <div className="mt-3 flex h-[20%] flex-col items-center justify-center pb-3">
+          <div className="mt-3 flex h-1/5 flex-col items-center justify-center pb-3">
             <p className="w-2/3">Total: EUR {totalCost()}</p>
             <CheckoutButton
               onCheckout={handleCheckout}
@@ -101,12 +85,53 @@ const Bag: React.FC = () => {
 
 export default Bag;
 
-interface checkoutButtonProps {
+interface BagProductProps {
+  product: BagItemI;
+}
+
+const BagProduct: React.FC<BagProductProps> = ({ product }) => {
+  const { img, name, price, currency, description, priceId } = product;
+
+  const removeItemFromBag = useBagStore((state) => state.removeItemFromCart);
+
+  return (
+    <div className="flex h-44 border-b border-black p-3">
+      <div className="relative h-full w-1/2 overflow-hidden rounded">
+        <Image
+          fill
+          sizes="250px"
+          className="object-cover"
+          src={img}
+          alt={name}
+        />
+      </div>
+      <div className="flex h-full w-1/2 flex-col justify-between gap-3 pl-3">
+        <div>
+          <p className="text-xl font-bold">{name}</p>
+          <p className="truncate">{description}</p>
+        </div>
+        <div>
+          <p className="uppercase">
+            {currency} {price}
+          </p>
+          <button
+            className="h-12 w-full rounded bg-black text-lg text-white"
+            onClick={() => removeItemFromBag(priceId)}
+          >
+            Remove
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+interface CheckoutButtonProps {
   onCheckout: () => void;
   checkoutPending: boolean;
 }
 
-const CheckoutButton: React.FC<checkoutButtonProps> = ({
+const CheckoutButton: React.FC<CheckoutButtonProps> = ({
   onCheckout,
   checkoutPending,
 }) => {

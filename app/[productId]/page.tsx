@@ -28,6 +28,7 @@ export default async function ProductPage({ params }: { params: ParamsI }) {
           fill
           className="object-cover"
           sizes="500px"
+          quality={100}
           src={images[0]}
           alt={name}
           priority
@@ -49,6 +50,8 @@ export default async function ProductPage({ params }: { params: ParamsI }) {
             img={images[0]}
             name={name}
             price={price}
+            currency={currency}
+            description={description}
           />
         </div>
       </div>

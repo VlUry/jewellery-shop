@@ -5,6 +5,8 @@ export interface BagItemI {
   name: string;
   img: string;
   price: number;
+  currency: string;
+  description: string | null;
 }
 
 interface BagI {
