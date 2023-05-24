@@ -2,7 +2,7 @@ import { NextRequest } from "next/server";
 import Stripe from "stripe";
 
 export async function GET(req: NextRequest) {
-  const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET ?? "", {
+  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "", {
     apiVersion: "2022-11-15",
   });
 

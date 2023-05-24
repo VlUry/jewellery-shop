@@ -6,7 +6,7 @@ export interface ParamsI {
 }
 
 export async function GET(req: NextRequest, { params }: { params: ParamsI }) {
-  const stripe = new Stripe(process.env.NEXT_PUBLIC_STRIPE_SECRET ?? "", {
+  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "", {
     apiVersion: "2022-11-15",
   });
 

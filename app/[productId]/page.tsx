@@ -7,9 +7,7 @@ export interface ParamsI {
 }
 
 export default async function ProductPage({ params }: { params: ParamsI }) {
-  const res = await fetch(
-    `http://localhost:3000/api/product/${params.productId}`
-  );
+  const res = await fetch(`${process.env.URL}/api/product/${params.productId}`);
   const product = (await res.json()) as ProductI;
 
   const {

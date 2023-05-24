@@ -6,7 +6,7 @@ export interface ProductI extends Stripe.Product {
 }
 
 export default async function Home() {
-  const res = await fetch("http://localhost:3000/api/product");
+  const res = await fetch(`${process.env.URL}/api/product`);
   const products = (await res.json()) as ProductI[];
 
   return <ProductList products={products} />;
