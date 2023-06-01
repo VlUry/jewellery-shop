@@ -2,9 +2,30 @@ import Image from "next/image";
 import ProductButton from "@/components/ProductButton";
 import { notFound } from "next/navigation";
 import { fetchProduct } from "@/utils/stripe";
+import { Metadata } from "next";
 
 export interface ParamsI {
   productId: string;
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: ParamsI;
+}): Promise<Metadata> {
+  const product = await fetchProduct(params.productId);
+
+  if (!product) {
+    return { title: "404 - Aell" };
+  }
+
+  const { name, description: productDescription, images } = product;
+  const description = productDescription
+    ? productDescription
+    : "Handmade piece by Aell";
+  const title = `${name} - Aell`;
+
+  return { title, description, openGraph: { images, title, description } };
 }
 
 export default async function ProductPage({ params }: { params: ParamsI }) {

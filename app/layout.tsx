@@ -4,11 +4,6 @@ import { Sen } from "next/font/google";
 
 const sen = Sen({ weight: "400", subsets: ["latin"] });
 
-export const metadata = {
-  title: "Aell",
-  description: "Jewellery by Anastasiia",
-};
-
 export default function RootLayout({
   children,
 }: {
