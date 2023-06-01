@@ -25,7 +25,7 @@ const Bag: React.FC = () => {
     try {
       setCheckoutPending(true);
 
-      const res = await fetch("http://localhost:3000/api/checkout", {
+      const res = await fetch("api/checkout", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

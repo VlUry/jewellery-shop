@@ -1,13 +1,10 @@
 import ProductList from "@/components/ProductList";
-import Stripe from "stripe";
-
-export interface ProductI extends Stripe.Product {
-  default_price: Stripe.Price;
-}
+import { fetchAllProducts } from "@/utils/stripe";
 
 export default async function Home() {
-  const res = await fetch(`${process.env.URL}/api/product`);
-  const products = (await res.json()) as ProductI[];
+  const products = await fetchAllProducts();
+
+  if (!products) throw new Error("Something went wrong on the server");
 
   return <ProductList products={products} />;
 }

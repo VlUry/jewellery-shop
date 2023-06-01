@@ -25,7 +25,7 @@ const Header: React.FC = () => {
   });
 
   return (
-    <header className="sticky top-0 z-10 flex w-full justify-center bg-stone-50">
+    <header className="sticky top-0 z-10 flex w-full justify-center bg-stone-50 ">
       <nav
         className={`flex h-12 items-center justify-between border-b border-black transition-all delay-75 duration-200 ${
           isAtTop ? "w-2/3 px-3" : "w-full px-6"

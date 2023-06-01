@@ -1,15 +1,15 @@
+import getStripe from "@/utils/stripe";
 import { NextRequest } from "next/server";
-import Stripe from "stripe";
 
 export async function GET(req: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "", {
-    apiVersion: "2022-11-15",
-  });
+  const stripe = getStripe();
 
   try {
     const { data } = await stripe.products.list();
-    return new Response(JSON.stringify(data));
+    return new Response(JSON.stringify(null), { status: 500 });
   } catch (err: any) {
-    return new Response(err.message, { status: err.statusCode || 500 });
+    return new Response(JSON.stringify(null), {
+      status: err.statusCode || 500,
+    });
   }
 }

@@ -1,14 +1,16 @@
 import Image from "next/image";
-import { ProductI } from "../page";
 import ProductButton from "@/components/ProductButton";
+import { notFound } from "next/navigation";
+import { fetchProduct } from "@/utils/stripe";
 
 export interface ParamsI {
   productId: string;
 }
 
 export default async function ProductPage({ params }: { params: ParamsI }) {
-  const res = await fetch(`${process.env.URL}/api/product/${params.productId}`);
-  const product = (await res.json()) as ProductI;
+  const product = await fetchProduct(params.productId);
+
+  if (!product) notFound();
 
   const {
     images,

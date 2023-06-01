@@ -1,10 +1,8 @@
+import getStripe from "@/utils/stripe";
 import { NextRequest } from "next/server";
-import Stripe from "stripe";
 
 export async function POST(req: NextRequest) {
-  const stripe = new Stripe(process.env.STRIPE_SECRET ?? "", {
-    apiVersion: "2022-11-15",
-  });
+  const stripe = getStripe();
 
   const { origin } = new URL(req.url);
   const { line_items } = await req.json();
@@ -22,6 +20,6 @@ export async function POST(req: NextRequest) {
 
     return new Response(JSON.stringify(session));
   } catch (err: any) {
-    return new Response(err.message, { status: err.statusCode || 500 });
+    return new Response(null, { status: err.statusCode || 500 });
   }
 }
