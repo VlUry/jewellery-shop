@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Home() {
   const products = await fetchAllProducts();
 
-  if (!products) throw new Error("Something went wrong on the server");
+  if (!products) return <div>There are no products yet</div>;
 
   return <ProductList products={products} />;
 }
