@@ -6,7 +6,7 @@ export async function GET(req: NextRequest) {
 
   try {
     const { data } = await stripe.products.list();
-    return new Response(JSON.stringify(null), { status: 500 });
+    return new Response(JSON.stringify(data));
   } catch (err: any) {
     return new Response(JSON.stringify(null), {
       status: err.statusCode || 500,
