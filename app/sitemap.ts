@@ -10,6 +10,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const products = await fetchAllProducts();
+
+  if (!products) {
+    return [...routesSitemap];
+  }
+
   const productSitemap: MetadataRoute.Sitemap = products.map((product) => ({
     url: `${process.env.URL}/${product.id}`,
     lastModified: new Date(product.updated),

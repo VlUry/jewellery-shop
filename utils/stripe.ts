@@ -19,6 +19,9 @@ export function handleStripeError(error: any) {
 }
 
 export async function fetchAllProducts() {
+  if (!process.env.URL) {
+    return null;
+  }
   const res = await fetch(`${process.env.URL}/api/product`);
   const products = (await res.json()) as ProductI[];
 
@@ -26,6 +29,9 @@ export async function fetchAllProducts() {
 }
 
 export async function fetchProduct(productId: string) {
+  if (!process.env.URL) {
+    return null;
+  }
   const res = await fetch(`${process.env.URL}/api/product/${productId}`);
   const product = (await res.json()) as ProductI;
 
