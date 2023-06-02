@@ -1,6 +1,6 @@
 "use client";
 
-import { ProductI } from "@/app/page";
+import { ProductI } from "@/utils/stripe";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
